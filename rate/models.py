@@ -4,11 +4,22 @@ from django.core.validators import URLValidator,MaxValueValidator,MinValueValida
 from tinymce.models import HTMLField
 
 # Create your models here.
+class Rate(models.Model):
+    design=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
+    usability=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
+    content=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
+
+    def __str__(self):
+        return self.design
+
+
 class Profile(models.Model):
     profile_photo=models.ImageField(upload_to='profiles',blank=True)
     user = models.OneToOneField(User,null = True,on_delete=models.CASCADE,related_name = "profile")
     bio=models.TextField(blank=True,null=True)
     contact=models.EmailField(blank=True,null=True)
+    rate = models.ForeignKey(Rate,on_delete=models.CASCADE,null=True)
+
 
     def __str__(self):
         return self.user
@@ -17,11 +28,6 @@ class Profile(models.Model):
         self.save()
     def delete_profile(self):
         self.delete()
-
-class Rate(models.Model):
-    design=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
-    usability=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
-    content=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
 
 
 class Project(models.Model):
