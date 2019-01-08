@@ -18,6 +18,10 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+class Rate(models.Model):
+    design=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
+    usability=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
+    content=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
 
 
 class Project(models.Model):
@@ -26,9 +30,9 @@ class Project(models.Model):
     description=models.TextField(blank=True,null=True)
     profile=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     link=models.TextField(validators=[URLValidator()],blank=True)
-    design=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
-    usability=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
-    content=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
+    # design=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
+    # usability=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
+    # content=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
 
     
 
