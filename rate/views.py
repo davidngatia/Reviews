@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import NewProjectForm,NewProfileForm,NewRateForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import  Project
+from .models import  *
 from .serializer import ProjectSerializer,ProfileSerializer
 
 # Create your views here.
@@ -54,7 +54,8 @@ def projectdetails(request,project_id):
 
 def project(request,project_id):
    project = Project.objects.get(id=project_id)
-   rating = round(((project.design + project.usability + project.content)/3),2)
+#    rating = round(((Rate.design + Rate.usability + Rate.content)/3),2)
+   rating= Rate.design,Rate.usability,Rate.content
    if request.method == 'POST':
        form = NewRateForm(request.POST,request.FILES)
        if form.is_valid:

@@ -36,6 +36,7 @@ class Project(models.Model):
     description=models.TextField(blank=True,null=True)
     profile=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     link=models.TextField(validators=[URLValidator()],blank=True)
+    rate = models.ForeignKey(Rate,on_delete=models.CASCADE,null=True)
     # design=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
     # usability=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
     # content=models.PositiveIntegerField(choices=list(zip(range(1, 11), range(1, 11))), default=1)
